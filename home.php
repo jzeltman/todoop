@@ -33,6 +33,16 @@
 		$a_sorted[$k]["Priority"] = getPriority($a_item);
 	}
 	$a_sorted = array_reverse(array_csort($a_sorted,"Priority"));
+	
+	
+	$i_hours = 2;
+	
+	$a_ready = array();
+	foreach ($a_sorted as $k => $a_item) {
+		$match = ($a_item["Cost"] - 1);
+		if ($match <= $i_hours) { $a_ready[] = $a_item; }
+	}
+	
 ?>
 <!DOCTYPE html>
 <!--[if lt IE 7]>      <html class="no-js lt-ie9 lt-ie8 lt-ie7"> <![endif]-->
@@ -73,6 +83,15 @@
 <ul>
 <?
 	foreach ($a_sorted as $a_item) { 
+?>
+	<li><?= $a_item["Summary"]; ?> <?= $a_item["Benefit"]." / ".$a_item["Cost"]." / ".$a_item["Risk"]." / ".$a_item["Priority"]; ?></li>
+<? } ?>
+</ul>
+
+<h3>Ready</h3>
+<ul>
+<?
+	foreach ($a_ready as $a_item) { 
 ?>
 	<li><?= $a_item["Summary"]; ?> <?= $a_item["Benefit"]." / ".$a_item["Cost"]." / ".$a_item["Risk"]." / ".$a_item["Priority"]; ?></li>
 <? } ?>
